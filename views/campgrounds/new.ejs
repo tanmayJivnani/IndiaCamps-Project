@@ -1,0 +1,52 @@
+<% layout('layouts/boilerplate') %> 
+<div class="row">
+    <div class="col-6 offset-3">
+        <h3 class="text-center">Create New Campground</h3>
+        <form action="/campgrounds" method="POST" class="needs-validation" novalidate >
+        <div class="mb-3">
+            <label class="form-label" for="title">Title </label>
+            <input class="form-control" type="text" id="title" name="campground[title]" required>
+            <div class="invalid-feedback">
+                Title should not be empty!
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="location">Location </label>
+            <input class="form-control" type="text" id="location" name="campground[location]" required>
+            <div class="invalid-feedback">
+                Location should not be empty!
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="image">Image URL </label>
+            <input class="form-control" type="text" id="image" name="campground[image]" required>
+            <div class="invalid-feedback">
+                Image URL should not be empty!
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="price">Price </label>
+            <div class="input-group">
+                <span class="input-group-text" id="price-label">₹</span>
+                <input type="input" id="price-label" name="campground[price]"  nameclass="form-control" placeholder="0.00" aria-label="price" aria-describedby="price-label" required>
+                <div class="invalid-feedback">
+                    Price should not be empty!
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="description">Description </label>
+            <textarea class="form-control" id="description" name="campground[description]" required></textarea>
+            <div class="invalid-feedback">
+                Description should not be empty!
+            </div>
+        </div>
+        
+        <div class="mb-3">
+            <button class="btn btn-success">Submit</button>
+        </div>
+    </form>
+    <div><a href="/campgrounds">All Campgrounds</a></div>
+    </div>
+</div>
+    
