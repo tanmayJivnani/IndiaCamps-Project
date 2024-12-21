@@ -1,23 +1,61 @@
-<% layout('layouts/boilerplate') %> 
+<% layout('layouts/boilerplate') %>
     <h2>Showing All Campgrounds:</h2>
     <div><a href="/campgrounds/new">Add Campground</a>
     </div>
+    <% let i=0 %>
         <% for (const campground of campgrounds) {%>
             <div class="card mb-3">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="<%= campground.image %>" class="img-fluid rounded-start" alt="">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h1 class="card-title"><%= campground.title %></h1>
-                                <h2 class="card-subtitle"><%= campground.location %></h2>
-                                <p class="card-text"><%= campground.description %></p>
-                                <p class="card-text text-muted h4">₹<%= campground.price %></p>
-                                <a class="btn btn-primary" href="/campgrounds/<%= campground._id %>">View <%= campground.title %></a>
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <div id="campgroundCarousel<%= i %>" class="carousel slide">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#campgroundCarousel<%= i %>" data-bs-slide-to="0"
+                                    class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <% for(let j=1; j < campground.images.length; j++){ %>
+                                    <button type="button" data-bs-target="#campgroundCarousel<%= i %>"
+                                        data-bs-slide-to="<%= j %>" aria-label="Slide <%= j %>"></button>
+                                    <% } %>
                             </div>
+                            <div class="carousel-inner">
+                                <% campground.images.forEach((img, i)=> { %>
+                                    <div class="carousel-item <%= i===0 ? 'active' : '' %> ">
+                                        <img src="<%= img.url %>" class="d-block w-100" alt="">
+                                    </div>
+                                    <% }) %>
+                            </div>
+                            <% if(campground.images.length> 1){ %>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#campgroundCarousel<%= i %>"
+                                    data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#campgroundCarousel<%= i %>"
+                                    data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                                <% } %>
                         </div>
+                        <!-- <img src="<%= campground.image %>" class="img-fluid rounded-start" alt=""> -->
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h1 class="card-title">
+                                <%= campground.title %>
+                            </h1>
+                            <h2 class="card-subtitle">
+                                <%= campground.location %>
+                            </h2>
+                            <p class="card-text">
+                                <%= campground.description %>
+                            </p>
+                            <p class="card-text text-muted h4">₹<%= campground.price %>
+                            </p>
+                            <a class="btn btn-primary" href="/campgrounds/<%= campground._id %>">View <%=
+                                    campground.title %></a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        <% } %>
-  
+            <% i++ %>
+            <% } %>

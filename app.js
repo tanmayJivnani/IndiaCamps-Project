@@ -1,9 +1,12 @@
+if(process.env.NODE_ENV !== "production"){
+    require('dotenv').config();
+}
+
 const express = require('express');
 const app=express();
 
 const path = require('path');
 const mongoose = require('mongoose')
-
 const ExpressError=require('./utils/expressError')
 const methodOverride=require("method-override")
 const ejsMate=require('ejs-mate')
