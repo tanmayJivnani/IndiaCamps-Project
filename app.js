@@ -18,6 +18,8 @@ const flash = require('connect-flash')
 const passport=require('passport')
 const LocalStrategy = require('passport-local');
 const User=require('./models/user')
+const mongoSanitize = require('express-mongo-sanitize')
+const helmet = require('helmet')
 
 mongoose.connect('mongodb://127.0.0.1:27017/yelpCamp');
 const db=mongoose.connection
@@ -32,14 +34,61 @@ app.set('views', path.join(__dirname, 'views'))
 //USE
 app.use(express.urlencoded({extended:true}))
 app.use(methodOverride('_method'))
+app.use(mongoSanitize())
+app.use(helmet())
+
+//HELMET
+const scriptSrcUrls = [
+    "https://cdn.jsdelivr.net/",
+    "https://kit.fontawesome.com",
+    "https://cdnjs.cloudflare.com",
+    "https://cdn.jsdelivr.net",
+    "https://cdn.maptiler.com/"
+];
+const styleSrcUrls = [
+    "https://kit-free.fontawesome.com",
+    "https://cdn.jsdelivr.net/",
+    "https://fonts.googleapis.com",
+    "https://use.fontawesome.com",
+    "https://cdn.maptiler.com/"
+];
+const connectSrcUrls = [
+    "https://api.maptiler.com/", // add this
+];
+
+const fontSrcUrls = [];
+app.use(
+    helmet.contentSecurityPolicy({
+        directives: {
+            defaultSrc: [],
+            connectSrc: ["'self'", ...connectSrcUrls],
+            scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
+            styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+            workerSrc: ["'self'", "blob:"],
+            childSrc: ["blob:"],
+            objectSrc: [],
+            imgSrc: [
+                "'self'",
+                "blob:",
+                "data:",
+                "https://res.cloudinary.com/dndlqml2w/", 
+                "https://images.unsplash.com",
+                "https://api.maptiler.com/"
+            ],
+            fontSrc: ["'self'", ...fontSrcUrls],
+        },
+    })
+);
 
 const sessionConfig = {
+    name: 'random',
     secret: 'thisshouldbeabettersecret!', 
     resave: false,
     saveUninitialized: true, 
     cookie:{
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7, // a week from now
         httpOnly: true, 
+        // secure: true,
         maxAge: 1000 * 60 * 60 * 24 * 7
     }
 }

@@ -33,17 +33,18 @@ const seedBD = async () => {
             price,
             images: [
                 {
-                    url: "https://res.cloudinary.com/dndlqml2w/image/upload/v1734690002/YelpCamp/agvcllfluzwo3behofna.jpg",
-                    filename: "YelpCamp/agvcllfluzwo3behofna",
+                    url: "https://res.cloudinary.com/dndlqml2w/image/upload/v1734711710/YelpCamp/szagu8jrmo7h5y6s1wn3.jpg",
+                    filename : "YelpCamp/szagu8jrmo7h5y6s1wn3",
                 },
                 {
-                    url: "https://res.cloudinary.com/dndlqml2w/image/upload/v1734690003/YelpCamp/cnnpto1t6cwnwysanejy.jpg",
-                    filename: "YelpCamp/cnnpto1t6cwnwysanejy",
+                    url: "https://res.cloudinary.com/dndlqml2w/image/upload/v1734711757/YelpCamp/cjvnkglhiwbwmhtug2fy.jpg",
+                    filename: "YelpCamp/cjvnkglhiwbwmhtug2fy",
                 },
                 {
-                    url: "https://res.cloudinary.com/dndlqml2w/image/upload/v1734690005/YelpCamp/jtg0yomspymebloomaeq.jpg",
-                    filename : "YelpCamp/jtg0yomspymebloomaeq",
+                    url: "https://res.cloudinary.com/dndlqml2w/image/upload/v1734760661/YelpCamp/ub42fzali8uxs4hzb8es.jpg",
+                    filename: "YelpCamp/ub42fzali8uxs4hzb8es",
                 }
+                
             ]
         })
         await camp.save();
