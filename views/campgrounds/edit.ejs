@@ -59,8 +59,10 @@
                         <input type="checkbox" name="deleteImages[]" id="image-<%=i%>" value="<%= img.filename %>">
                     </div>
                     <label for="image-<%=i%>">Delete image <%=i+1%> ?</label>
+                    <br>
+                    <% }) %>
                 </div>
-                <% }) %>
+                
                 <div class="mb-3">
                     <button class="btn btn-info">Update Campground</button>
                 </div>

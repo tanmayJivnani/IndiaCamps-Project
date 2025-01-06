@@ -4,7 +4,7 @@ if(process.env.NODE_ENV !== "production"){
 
 const express = require('express');
 const app=express();
-
+let port=4000;
 const path = require('path');
 const mongoose = require('mongoose')
 const ExpressError=require('./utils/expressError')
@@ -145,6 +145,11 @@ app.use((err, req, res, next)=>{
     res.status(statusCode).render('error', {err});
 })
 
-app.listen(3000, ()=>{
-    console.log('Listening on Port 3000');
+
+if(process.env.NODE_ENV === "production"){
+    let port = process.env.PORT || 4000;
+}
+
+app.listen(port, ()=>{
+    console.log(`Listening on Port ${port}`);
 })
