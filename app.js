@@ -21,12 +21,18 @@ const User=require('./models/user')
 const mongoSanitize = require('express-mongo-sanitize')
 const helmet = require('helmet')
 
-mongoose.connect('mongodb://127.0.0.1:27017/yelpCamp');
+const MongoStore = require('connect-mongo');
+
+
+const dbUrl = process.env.DB_URL;
+ //'mongodb://127.0.0.1:27017/yelpCamp'
+mongoose.connect(dbUrl);
 const db=mongoose.connection
 db.on('error', console.error.bind(console, "Connection Error: "))
 db.once('open', ()=>{
     console.log(`Database ${db.name} Connected!`);
 })
+
 //SET
 app.engine('ejs', ejsMate)
 app.set('view engine', 'ejs')
@@ -42,7 +48,7 @@ const scriptSrcUrls = [
     "https://cdn.jsdelivr.net/",
     "https://kit.fontawesome.com",
     "https://cdnjs.cloudflare.com",
-    "https://cdn.jsdelivr.net",
+    "https://cdn.jsdelivr.net/",
     "https://cdn.maptiler.com/"
 ];
 const styleSrcUrls = [
@@ -56,7 +62,9 @@ const connectSrcUrls = [
     "https://api.maptiler.com/", // add this
 ];
 
-const fontSrcUrls = [];
+const fontSrcUrls = [
+    "https://cdn.jsdelivr.net/",
+];
 app.use(
     helmet.contentSecurityPolicy({
         directives: {
@@ -80,7 +88,17 @@ app.use(
     })
 );
 
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    touchAfter: 24 * 60 * 60,
+    crypto: {
+        secret: 'thisshouldbeabettersecret!'
+    }
+});
+
+
 const sessionConfig = {
+    store,
     name: 'random',
     secret: 'thisshouldbeabettersecret!', 
     resave: false,
