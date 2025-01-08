@@ -21,7 +21,7 @@ const rSample = arr => arr[Math.floor(Math.random() * arr.length)]
 const seedBD = async () => {
     await Campground.deleteMany({})
     // let random1000 = Math.floor(Math.random() * 1000)
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < 200; i++) {
         let randomNum = Math.floor(Math.random() * 528);
         let price = Math.floor(Math.random() * 2000) + 1000;
         let camp = new Campground({
