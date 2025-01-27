@@ -1,8 +1,10 @@
 /* Full-page background setup */
 body {
     height: 100vh;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-        url("https://images.unsplash.com/photo-1559521783-1d1599583485?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+        /* url("https://images.unsplash.com/photo-1559521783-1d1599583485?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"); */
+        /* url("https://images.unsplash.com/photo-1602391833977-358a52198938?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"); */
+        url("https://images.unsplash.com/photo-1576176539998-0237d1ac6a85?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -54,7 +56,11 @@ footer {
 /* Specific adjustments for large screens */
 .btn.btn-lg {
     display: inline-block !important; /* Reset to inline-block */
-    width: auto !important;          /* Ensure button's width adapts to its content */
+    width: auto !important;
+    margin-left:auto;          /* Ensure button's width adapts to its content */
+    margin-right:auto; 
+    padding-left: 1.5em;         /* Ensure button's width adapts to its content */
+    padding-right: 1.5em;         /* Ensure button's width adapts to its content */
 }
 
 /* Mobile-specific styles */
